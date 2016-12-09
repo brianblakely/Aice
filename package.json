@@ -4,6 +4,8 @@
   "description": "A GUI for Ice.",
   "main": "main.js",
   "scripts": {
+    "start": "webpack --watch & electron .",
+    "build": "webpack --devtool=source-map --optimize-minimize --optimize-occurence-order --optimize-dedupe --progress && date",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -28,9 +30,14 @@
   "devDependencies": {
     "babel-core": "^6.20.0",
     "babel-loader": "^6.2.9",
+    "babel-preset-babili": "0.0.9",
     "babel-preset-env": "0.0.9",
     "babel-preset-react": "^6.16.0",
+    "css-loader": "^0.26.1",
     "eslint": "^3.12.0",
+    "node-sass": "^3.13.0",
+    "sass-loader": "^4.0.2",
+    "style-loader": "^0.13.1",
     "webpack": "^1.14.0",
     "webpack-dev-server": "^1.16.2"
   }

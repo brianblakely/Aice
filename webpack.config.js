@@ -8,19 +8,6 @@ module.exports = {
     renderer: `./renderer.jsx`
   },
 
-  plugins: [
-    new webpack.optimize.DedupePlugin(),
-
-    new webpack.optimize.UglifyJsPlugin({
-      mangle: {
-        except: [`$super`, `$`, `exports`, `require`]
-      },
-      compress: {
-        warnings: false
-      }
-    })
-  ],
-
   resolve: {
     extensions: [``, `.js`, `.jsx`]
   },
