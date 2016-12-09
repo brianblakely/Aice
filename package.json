@@ -26,6 +26,7 @@
     "react-virtualized": "^8.7.1"
   },
   "devDependencies": {
+    "eslint": "^3.12.0",
     "webpack": "^1.14.0",
     "webpack-dev-server": "^1.16.2"
   }
