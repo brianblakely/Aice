@@ -2,7 +2,7 @@
   "name": "aice",
   "version": "1.0.0",
   "description": "A GUI for Ice.",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -17,9 +17,11 @@
   },
   "homepage": "https://github.com/brianblakely/Aice#readme",
   "dependencies": {
+    "material-ui": "^0.16.4",
     "react": "^15.4.1",
     "react-addons-shallow-compare": "^15.4.1",
     "react-dom": "^15.4.1",
+    "react-tap-event-plugin": "^2.0.1",
     "react-virtualized": "^8.7.1"
   },
   "devDependencies": {
