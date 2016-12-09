@@ -1,13 +1,12 @@
+import electron from 'electron';
+import path from 'path';
+import url from 'url';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
-const electron = require(`electron`);
 // Module to control application life.
 const app = electron.app;
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow;
-
-const path = require(`path`);
-const url = require(`url`);
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -20,11 +19,15 @@ function createWindow () {
   mainWindow.maximize();
 
   // and load the index.html of the app.
-  mainWindow.loadURL(url.format({
-    pathname: path.join(__dirname, `index.html`),
-    protocol: `file:`,
-    slashes: true
-  }));
+  mainWindow.loadURL(
+    process.env.NODE_ENV === `production`
+      ? url.format({
+        pathname: path.join(__dirname, `index.html`),
+        protocol: `file:`,
+        slashes: true
+      })
+      : `http://localhost:8080/`
+  );
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();

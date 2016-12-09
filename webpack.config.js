@@ -1,8 +1,10 @@
 const webpack = require(`webpack`);
 
 module.exports = {
-  watch: true,
   context: process.cwd(),
+
+  target: `electron-renderer`,
+
   entry: {
     main: `./main.jsx`,
     renderer: `./renderer.jsx`
@@ -26,7 +28,12 @@ module.exports = {
               }
             }],
             `react`
-          ]
+          ],
+          env: {
+            production: {
+              presets: [`babili`]
+            }
+          }
         }
       },
       {
