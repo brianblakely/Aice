@@ -1,7 +1,6 @@
 import electron from 'electron';
 import path from 'path';
 import url from 'url';
-import injectTapEventPlugin from 'react-tap-event-plugin';
 
 // Module to control application life.
 const app = electron.app;
@@ -20,13 +19,13 @@ function createWindow () {
 
   // and load the index.html of the app.
   mainWindow.loadURL(
-    process.env.NODE_ENV === `production`
-      ? url.format({
+    process.env.NODE_ENV === `development`
+      ? `http://localhost:8080/`
+      : url.format({
         pathname: path.join(__dirname, `index.html`),
         protocol: `file:`,
         slashes: true
       })
-      : `http://localhost:8080/`
   );
 
   // Open the DevTools.
@@ -44,7 +43,13 @@ function createWindow () {
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.on(`ready`, createWindow);
+app.on(`ready`, ()=> {
+  if(process.env.NODE_ENV === `development`) {
+    BrowserWindow.addDevToolsExtension(`./devtools/react/`);
+  }
+
+  createWindow();
+});
 
 // Quit when all windows are closed.
 app.on(`window-all-closed`, function () {
