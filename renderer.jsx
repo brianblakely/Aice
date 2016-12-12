@@ -167,7 +167,6 @@ const layout =
                   buttonLabel: `Select`,
                   properties: [`openFile`, `openDirectory`]
                 }, (e)=> {
-                  console.log(`e`, e);
                 });
               }}
             /><br />
@@ -189,7 +188,6 @@ const layout =
                   buttonLabel: `Select`,
                   properties: [`openFile`]
                 }, (e)=> {
-                  console.log(`e`, e);
                 });
               }}
               disabled={!window.retroarch}
@@ -225,7 +223,6 @@ const layout =
                 buttonLabel: `Select`,
                 properties: [`openDirectory`]
               }, (e)=> {
-                console.log(`e`, e);
               });
             }}
           />
@@ -271,7 +268,6 @@ const layout =
                 buttonLabel: `Select`,
                 properties: [`openDirectory`]
               }, (e)=> {
-                console.log(`e`, e);
               });
             }}
           />
@@ -300,7 +296,6 @@ const layout =
                 }],
                 properties: [`openFile`]
               }, (e)=> {
-                console.log(`e`, e);
               });
             }}
           />
@@ -342,7 +337,6 @@ const layout =
                 buttonLabel: `Select`,
                 properties: [`openDirectory`]
               }, (e)=> {
-                console.log(`e`, e);
               });
             }}
           /><br />
@@ -363,7 +357,6 @@ const layout =
                 buttonLabel: `Select`,
                 properties: [`openDirectory`]
               }, (e)=> {
-                console.log(`e`, e);
               });
             }}
           /><br />
@@ -384,7 +377,6 @@ const layout =
                 buttonLabel: `Select`,
                 properties: [`openDirectory`]
               }, (e)=> {
-                console.log(`e`, e);
               });
             }}
           /><br />

@@ -1,17 +1,242 @@
-import electron from 'electron';
+import electron, { app, BrowserWindow, Menu, shell, dialog } from 'electron';
 import path from 'path';
 import url from 'url';
 
-// Module to control application life.
-const app = electron.app;
-// Module to create native browser window.
-const BrowserWindow = electron.BrowserWindow;
+app.setName(`Aice`);
+
+const createMenu = ()=> {
+  const template = [
+    {
+      label: `Edit`,
+      submenu: [
+        {
+          role: `undo`
+        },
+        {
+          role: `redo`
+        },
+        {
+          type: `separator`
+        },
+        {
+          role: `cut`
+        },
+        {
+          role: `copy`
+        },
+        {
+          role: `paste`
+        },
+        {
+          role: `pasteandmatchstyle`
+        },
+        {
+          role: `delete`
+        },
+        {
+          role: `selectall`
+        }
+      ]
+    },
+    {
+      label: `View`,
+      submenu: [
+        {
+          role: `reload`
+        },
+        {
+          role: `toggledevtools`
+        },
+        {
+          type: `separator`
+        },
+        {
+          role: `resetzoom`
+        },
+        {
+          role: `zoomin`
+        },
+        {
+          role: `zoomout`
+        },
+        {
+          type: `separator`
+        },
+        {
+          role: `togglefullscreen`
+        }
+      ]
+    },
+    {
+      label: `Import`,
+      submenu: [
+        {
+          label: `Platforms / Consoles...`,
+          click() {
+            dialog.showOpenDialog(mainWindow, {
+              title: `Import`,
+              buttonLabel: `Import`,
+              filters: [{
+                name: `Ice Configuration File`,
+                extensions: [`txt`]
+              }],
+              properties: [`openFile`]
+            }, (e)=> {
+            });
+          }
+        },
+        {
+          label: `Emulators...`,
+          click() {
+            dialog.showOpenDialog(mainWindow, {
+              title: `Import`,
+              buttonLabel: `Import`,
+              filters: [{
+                name: `Ice Configuration File`,
+                extensions: [`txt`]
+              }],
+              properties: [`openFile`]
+            }, (e)=> {
+            });
+          }
+        },
+      ]
+    },
+    {
+      label: `Export`,
+      submenu: [
+        {
+          label: `Platforms / Consoles...`,
+          click() {
+            dialog.showOpenDialog(mainWindow, {
+              title: `Export`,
+              buttonLabel: `Export`,
+              properties: [`openDirectory`]
+            }, (e)=> {
+            });
+          }
+        },
+        {
+          label: `Emulators...`,
+          click() {
+            dialog.showOpenDialog(mainWindow, {
+              title: `Export`,
+              buttonLabel: `Export`,
+              properties: [`openDirectory`]
+            }, (e)=> {
+            });
+          }
+        },
+      ]
+    },
+    {
+      role: `window`,
+      submenu: [
+        {
+          role: `minimize`
+        },
+        {
+          role: `close`
+        }
+      ]
+    },
+    {
+      role: `help`,
+      submenu: [
+        {
+          label: `Learn More`,
+          click() { shell.openExternal(`http://electron.atom.io`) }
+        }
+      ]
+    }
+  ];
+
+  if(process.platform === `darwin`) {
+    template.unshift({
+      label: app.getName(),
+      submenu: [
+        {
+          role: `about`
+        },
+        {
+          type: `separator`
+        },
+        {
+          role: `services`,
+          submenu: []
+        },
+        {
+          type: `separator`
+        },
+        {
+          role: `hide`
+        },
+        {
+          role: `hideothers`
+        },
+        {
+          role: `unhide`
+        },
+        {
+          type: `separator`
+        },
+        {
+          role: `quit`
+        }
+      ]
+    });
+    // Edit menu.
+    template[1].submenu.push(
+      {
+        type: `separator`
+      },
+      {
+        label: `Speech`,
+        submenu: [
+          {
+            role: `startspeaking`
+          },
+          {
+            role: `stopspeaking`
+          }
+        ]
+      }
+    );
+    // Window menu.
+    template[5].submenu = [
+      {
+        label: `Close`,
+        accelerator: `CmdOrCtrl+W`,
+        role: `close`
+      },
+      {
+        label: `Minimize`,
+        accelerator: `CmdOrCtrl+M`,
+        role: `minimize`
+      },
+      {
+        label: `Zoom`,
+        role: `zoom`
+      },
+      {
+        type: `separator`
+      },
+      {
+        label: `Bring All to Front`,
+        role: `front`
+      }
+    ];
+  }
+
+  const menu = Menu.buildFromTemplate(template);
+  Menu.setApplicationMenu(menu);
+};
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
 
-function createWindow () {
+const createWindow = ()=> {
   // Create the browser window.
   mainWindow = new BrowserWindow({
     width: 800,
@@ -34,7 +259,7 @@ function createWindow () {
   );
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools();
+  process.env.NODE_ENV === `development` && mainWindow.webContents.openDevTools();
 
   // Emitted when the window is closed.
   mainWindow.on(`closed`, function () {
@@ -43,7 +268,7 @@ function createWindow () {
     // when you should delete the corresponding element.
     mainWindow = null;
   });
-}
+};
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
@@ -53,6 +278,7 @@ app.on(`ready`, ()=> {
     BrowserWindow.addDevToolsExtension(`./devtools/react/`);
   }
 
+  createMenu();
   createWindow();
 });
 
