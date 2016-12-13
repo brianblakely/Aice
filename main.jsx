@@ -2,6 +2,8 @@ import electron, { app, BrowserWindow, Menu, shell, dialog } from 'electron';
 import path from 'path';
 import url from 'url';
 
+import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
+
 app.setName(`Aice`);
 
 const createMenu = ()=> {
@@ -242,7 +244,7 @@ const createWindow = ()=> {
     width: 800,
     height: 600,
     fullscreenable: false,
-    backgroundColor: `#2e2c29`
+    backgroundColor: darkBaseTheme.palette.canvasColor
   });
 
   mainWindow.maximize();

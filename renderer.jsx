@@ -16,6 +16,7 @@ import { render } from 'react-dom';
 
 import { grey400 } from 'material-ui/styles/colors.js';
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
+import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import Drawer from 'material-ui/Drawer';
@@ -66,34 +67,60 @@ const settingsActions = [
   />,
 ];
 
-const x = -1;
+// const aiceThemePalette = Object.assign(darkBaseTheme.palette, {
+//   primary1Color: `#03A9F4`,
+//   // primary2Color: cyan700,
+//   // primary3Color: grey400,
+//   // accent1Color: pinkA200,
+//   // accent2Color: grey100,
+//   // accent3Color: grey500,
+//   textColor: `#212121`,
+//   alternateTextColor: `white`,
+//   canvasColor: `#F5F5F5`,
+//   // borderColor: grey300,
+//   // disabledColor: fade(darkBlack, 0.3),
+//   // pickerHeaderColor: cyan500,
+//   // clockCircleColor: fade(darkBlack, 0.07),
+//   // shadowColor: fullBlack,
+// });
 
-const cards = (()=> {
+// const aiceTheme = Object.assign(darkBaseTheme, {
+//   palette: aiceThemePalette
+// });
 
-})();
+const aiceTheme = darkBaseTheme;
 
 const layout =
   <div style={{
-    height: `100vh`
+    minHeight: `100vh`
   }}>
-    <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
+    <MuiThemeProvider muiTheme={getMuiTheme(aiceTheme)}>
       <Paper style={{
         display: `flex`,
         flexFlow: `row wrap`,
         alignItems: `flex-start`,
         justifyContent: `space-between`,
-        padding: `2vw`,
+        padding: `0 16px 16px`,
         width: `calc(100% - 256px)`,
-        height: `100vh`,
+        minHeight: `100vh`,
         textAlign: `justify`
       }}>
+        <AppBar title="Palette preview" />
+        <FloatingActionButton />
+        <Subheader
+          style={{
+            padding: `0`
+          }}
+        >
+          Games
+        </Subheader>
         {new Array(100).fill(
           <Card
             style={{
               display: `inline-block`,
-              width: `48.5%`,
+              width: `calc(50% - 16px / 2)`,
               maxWidth: `460px`,
-              marginBottom: `2vw`
+              marginBottom: `16px`
             }}
           >
             <CardHeader
@@ -124,7 +151,7 @@ const layout =
       </Paper>
     </MuiThemeProvider>
 
-    <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
+    <MuiThemeProvider muiTheme={getMuiTheme(aiceTheme)}>
       <Drawer open={true} openSecondary={true}>
         <Subheader>Platforms</Subheader>
         <SelectableList defaultValue={1} onChange={()=>{}}>
