@@ -24,6 +24,8 @@ import { List, ListItem, makeSelectable } from 'material-ui/List';
 import Subheader from 'material-ui/Subheader';
 import IconContentAdd from 'material-ui/svg-icons/content/add';
 import IconFolderOpen from 'material-ui/svg-icons/file/folder-open';
+import IconExclude from 'material-ui/svg-icons/av/not-interested';
+import IconImage from 'material-ui/svg-icons/image/image';
 import IconSettings from 'material-ui/svg-icons/action/settings';
 import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -36,6 +38,7 @@ import MenuItem from 'material-ui/MenuItem';
 import Chip from 'material-ui/Chip';
 import Dialog from 'material-ui/Dialog';
 import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigation';
+import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
@@ -63,22 +66,64 @@ const settingsActions = [
   />,
 ];
 
+const x = -1;
+
+const cards = (()=> {
+
+})();
+
 const layout =
   <div style={{
-    height: `100%`
+    height: `100vh`
   }}>
     <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
       <Paper style={{
-        height: `100%`
+        display: `flex`,
+        flexFlow: `row wrap`,
+        alignItems: `flex-start`,
+        justifyContent: `space-between`,
+        padding: `2vw`,
+        width: `calc(100% - 256px)`,
+        height: `100vh`,
+        textAlign: `justify`
       }}>
-        <Paper style={{
-          width: `300px`,
-          height: `200px`
-        }}>
-
-        </Paper>
+        {new Array(100).fill(
+          <Card
+            style={{
+              display: `inline-block`,
+              width: `48.5%`,
+              maxWidth: `460px`,
+              marginBottom: `2vw`
+            }}
+          >
+            <CardHeader
+              title="Blast Corps"
+              subtitle="Nintendo 64"
+            />
+            <CardMedia>
+              <img src="images/fpo1.png" />
+            </CardMedia>
+            <CardActions>
+              <IconButton
+                tooltip="Exclude From Steam"
+              >
+                <IconExclude />
+              </IconButton>
+              <IconButton
+                tooltip="Use Custom Image"
+              >
+                <IconImage />
+              </IconButton>
+            </CardActions>
+          </Card>
+        )}
+        <div style={{
+          display: `inline-block`,
+          width: `100%`
+        }}></div>
       </Paper>
     </MuiThemeProvider>
+
     <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
       <Drawer open={true} openSecondary={true}>
         <Subheader>Platforms</Subheader>
