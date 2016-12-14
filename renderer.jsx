@@ -67,34 +67,28 @@ const settingsActions = [
   />,
 ];
 
-const aiceThemePalette = Object.assign({}, darkBaseTheme.palette, {
-  primary1Color: `red`,
-  primary2Color: `orange`,
-  primary3Color: `yellow`,
-  accent1Color: `green`,
-  accent2Color: `blue`,
-  accent3Color: `indigo`,
-  textColor: `white`,
-  secondaryTextColor: `brown`,
-  alternateTextColor: `black`,
-  canvasColor: `#262626`,
-  borderColor: `grey`,
-  disabledColor: `beige`,
-  pickerHeaderColor: `teal`,
-  clockCircleColor: `maroon`,
-});
+// const aiceThemePalette = Object.assign({}, darkBaseTheme.palette, {
+//   primary1Color: `red`,
+//   primary2Color: `orange`,
+//   primary3Color: `yellow`,
+//   accent1Color: `green`,
+//   accent2Color: `blue`,
+//   accent3Color: `indigo`,
+//   textColor: `white`,
+//   secondaryTextColor: `brown`,
+//   alternateTextColor: `black`,
+//   canvasColor: `#262626`,
+//   borderColor: `grey`,
+//   disabledColor: `beige`,
+//   pickerHeaderColor: `teal`,
+//   clockCircleColor: `maroon`,
+// });
 
-console.log(`darkBaseTheme.palette`, darkBaseTheme.palette);
-console.log(`aiceThemePalette`, aiceThemePalette);
+// const aiceTheme = Object.assign({}, darkBaseTheme, {
+//   palette: aiceThemePalette
+// });
 
-const aiceTheme = Object.assign({}, darkBaseTheme, {
-  palette: aiceThemePalette
-});
-
-console.log(`darkBaseTheme`, darkBaseTheme);
-console.log(`aiceTheme`, aiceTheme);
-
-// const aiceTheme = darkBaseTheme;
+const aiceTheme = darkBaseTheme;
 
 const layout =
   <div style={{
@@ -111,8 +105,6 @@ const layout =
         minHeight: `100vh`,
         textAlign: `justify`
       }}>
-        <AppBar title="Palette preview" />
-        <FloatingActionButton />
         <Subheader
           style={{
             padding: `0`
