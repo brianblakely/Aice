@@ -95,16 +95,19 @@ const layout =
     minHeight: `100vh`
   }}>
     <MuiThemeProvider muiTheme={getMuiTheme(aiceTheme)}>
-      <Paper style={{
-        display: `flex`,
-        flexFlow: `row wrap`,
-        alignItems: `flex-start`,
-        justifyContent: `space-between`,
-        padding: `0 16px 16px`,
-        width: `calc(100% - 256px)`,
-        minHeight: `100vh`,
-        textAlign: `justify`
-      }}>
+      <Paper
+        rounded={false}
+        style={{
+          display: `flex`,
+          flexFlow: `row wrap`,
+          alignItems: `flex-start`,
+          justifyContent: `space-between`,
+          padding: `0 16px 16px`,
+          width: `calc(100% - 256px)`,
+          minHeight: `100vh`,
+          textAlign: `justify`
+        }}
+      >
         <Subheader
           style={{
             padding: `0`
@@ -158,9 +161,7 @@ const layout =
           <ListItem primaryText="Add New Platform" value={3} rightIcon={<IconContentAdd />} />
         </SelectableList>
 
-        <Paper zDepth={2} style={{
-          backgroundColor: grey400
-        }}>
+        <Paper zDepth={2}>
           <TextField
             floatingLabelText="Steam Category Label"
             errorText={window.error && `This field is required`}
