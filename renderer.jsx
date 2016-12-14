@@ -67,28 +67,34 @@ const settingsActions = [
   />,
 ];
 
-// const aiceThemePalette = Object.assign(darkBaseTheme.palette, {
-//   primary1Color: `#03A9F4`,
-//   // primary2Color: cyan700,
-//   // primary3Color: grey400,
-//   // accent1Color: pinkA200,
-//   // accent2Color: grey100,
-//   // accent3Color: grey500,
-//   textColor: `#212121`,
-//   alternateTextColor: `white`,
-//   canvasColor: `#F5F5F5`,
-//   // borderColor: grey300,
-//   // disabledColor: fade(darkBlack, 0.3),
-//   // pickerHeaderColor: cyan500,
-//   // clockCircleColor: fade(darkBlack, 0.07),
-//   // shadowColor: fullBlack,
-// });
+const aiceThemePalette = Object.assign({}, darkBaseTheme.palette, {
+  primary1Color: `red`,
+  primary2Color: `orange`,
+  primary3Color: `yellow`,
+  accent1Color: `green`,
+  accent2Color: `blue`,
+  accent3Color: `indigo`,
+  textColor: `white`,
+  secondaryTextColor: `brown`,
+  alternateTextColor: `black`,
+  canvasColor: `#262626`,
+  borderColor: `grey`,
+  disabledColor: `beige`,
+  pickerHeaderColor: `teal`,
+  clockCircleColor: `maroon`,
+});
 
-// const aiceTheme = Object.assign(darkBaseTheme, {
-//   palette: aiceThemePalette
-// });
+console.log(`darkBaseTheme.palette`, darkBaseTheme.palette);
+console.log(`aiceThemePalette`, aiceThemePalette);
 
-const aiceTheme = darkBaseTheme;
+const aiceTheme = Object.assign({}, darkBaseTheme, {
+  palette: aiceThemePalette
+});
+
+console.log(`darkBaseTheme`, darkBaseTheme);
+console.log(`aiceTheme`, aiceTheme);
+
+// const aiceTheme = darkBaseTheme;
 
 const layout =
   <div style={{
@@ -376,8 +382,8 @@ const layout =
         <IconButton
           style={{
             position: `absolute`,
-            right: `0`,
-            bottom: `0`
+            top: `0`,
+            right: `0`
           }}
         >
           <IconSettings />
