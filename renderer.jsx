@@ -14,11 +14,9 @@ import { render } from 'react-dom';
 
 // Material UI
 
-import { grey400 } from 'material-ui/styles/colors.js';
-import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
-import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import Drawer from 'material-ui/Drawer';
 import AppBar from 'material-ui/AppBar';
 import { List, ListItem, makeSelectable } from 'material-ui/List';
@@ -38,8 +36,9 @@ import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import Chip from 'material-ui/Chip';
 import Dialog from 'material-ui/Dialog';
-import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigation';
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import {GridList, GridTile} from 'material-ui/GridList';
+import {Card, CardActions, CardHeader, CardMedia} from 'material-ui/Card';
+import { List as VList } from 'react-virtualized';
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
@@ -99,14 +98,9 @@ const layout =
         zDepth={0}
         rounded={false}
         style={{
-          display: `flex`,
-          flexFlow: `row wrap`,
-          alignItems: `flex-start`,
-          justifyContent: `space-between`,
           padding: `0 16px 16px`,
           width: `calc(100% - 256px)`,
-          minHeight: `100vh`,
-          textAlign: `justify`
+          minHeight: `100vh`
         }}
       >
         <Subheader
@@ -116,40 +110,40 @@ const layout =
         >
           Games
         </Subheader>
-        {new Array(100).fill(
-          <Card
-            style={{
-              display: `inline-block`,
-              width: `calc(50% - 16px / 2)`,
-              maxWidth: `460px`,
-              marginBottom: `16px`
-            }}
-          >
-            <CardHeader
-              title="Blast Corps"
-              subtitle="Nintendo 64"
-            />
-            <CardMedia>
-              <img src="images/fpo1.png" />
-            </CardMedia>
-            <CardActions>
-              <IconButton
-                tooltip="Exclude From Steam"
-              >
-                <IconExclude />
-              </IconButton>
-              <IconButton
-                tooltip="Use Custom Image"
-              >
-                <IconImage />
-              </IconButton>
-            </CardActions>
-          </Card>
-        )}
-        <div style={{
-          display: `inline-block`,
-          width: `100%`
-        }}></div>
+        <VList
+          width={window.innerWidth -(256 + 16 * 2)}
+          height={window.innerHeight}
+          rowCount={300}
+          rowHeight={345}
+
+          rowRenderer={({
+            index,
+            key,
+            style
+          })=> (
+            <div key={key} style={Object.assign(style, {
+              display: `flex`,
+              flexDirection: `row`,
+              justifyContent: `space-between`
+            })}>
+              {new Array(2).fill(
+                <GridTile
+                  title="Blast Corps"
+                  subtitle="Nintendo 64"
+                  // actionIcon={
+                  //   <IconButton
+                  //     tooltip="Exclude From Steam"
+                  //   >
+                  //     <IconExclude />
+                  //   </IconButton>
+                  // }
+                >
+                  <img src="images/fpo1.png" />
+                </GridTile>
+              )}
+            </div>
+          )}
+        />
       </Paper>
     </MuiThemeProvider>
 
