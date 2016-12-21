@@ -12,7 +12,11 @@ import { remote as electronRemote } from 'electron';
 import React from 'react';
 import { render } from 'react-dom';
 
-// Material UI
+// Services
+
+import Config from './js/config.js';
+
+// UI
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
@@ -42,6 +46,16 @@ import { List as VList } from 'react-virtualized';
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
+
+const consoles = new Config(`./Ice/consoles.txt`);
+
+console.log(`consoles.data`, consoles.data);
+
+for(const thing in consoles.data) {
+  const el = consoles.data[thing];
+
+  el.foo = `bar`;
+}
 
 const { dialog } = electronRemote;
 
