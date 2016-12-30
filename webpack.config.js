@@ -30,6 +30,9 @@ module.exports = {
             `react`
           ],
           env: {
+            development: {
+              presets: [`react-hmre`]
+            },
             production: {
               presets: [`babili`]
             }
