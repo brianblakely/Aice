@@ -9,23 +9,32 @@ module.exports = {
     main: `./main.jsx`,
     renderer: `./renderer.jsx`
   },
-
-  resolve: {
-    extensions: [``, `.js`, `.jsx`]
+  output: {
+    path: `${process.cwd()}/`,
+    filename: `[name].js`,
+    sourceMapFilename: `[name].js.map`
   },
 
+  resolve: {
+    extensions: [`.js`, `.jsx`]
+  },
+
+  // devtool: `cheap-module-eval-source-map`, // Not working 2017-03-25
+  devtool: `cheap-module-source-map`,
+
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.jsx$/,
         exclude: /(node_modules)/,
-        loader: `babel`,
-        query: {
+        loader: `babel-loader`,
+        options: {
           presets: [
             [`env`, {
               targets: {
                 node: `current`
-              }
+              },
+              modules: false
             }],
             `react`
           ],
@@ -38,19 +47,16 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loader: `style!css`
+        use: [`style-loader`, `css-loader`]
       },
       {
         test: /(\.scss|\.sass)$/,
-        loader: `style!css!sass`
+        use: [`style-loader`, `css-loader`, `sass-loader`]
       }
     ]
   },
 
-  devtool: `cheap-module-eval-source-map`,
-  output: {
-    path: `${process.cwd()}/`,
-    filename: `[name].js`,
-    sourceMapFilename: `[name].js.map`
+  devServer: {
+    compress: true
   }
 };

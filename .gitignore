@@ -1,6 +1,7 @@
 *.js
 *.map
 roms
+.vscode
 
 ### Node
 
