@@ -25,7 +25,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.jsx$/,
+        test: /\.(jsx|js)$/,
         exclude: /(node_modules)/,
         loader: `babel-loader`,
         options: {
@@ -39,6 +39,9 @@ module.exports = {
             `react`
           ],
           env: {
+            development: {
+              presets: [`react-hmre`]
+            },
             production: {
               presets: [`babili`]
             }
