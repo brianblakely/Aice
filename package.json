@@ -20,8 +20,9 @@
   },
   "homepage": "https://github.com/brianblakely/Aice#readme",
   "dependencies": {
-    "electron": "^1.6.2",
-    "material-ui": "^0.17.4",
+    "electron": "^1.6.5",
+    "material-ui": "^1.0.0-alpha.11",
+    "material-ui-icons": "^1.0.0-alpha.2",
     "node-ini": "^1.0.0",
     "react": "^15.5.4",
     "react-addons-shallow-compare": "^15.5.2",

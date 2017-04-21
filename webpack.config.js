@@ -20,7 +20,7 @@ module.exports = {
   },
 
   // devtool: `cheap-module-eval-source-map`, // Not working 2017-03-25
-  devtool: `cheap-module-source-map`,
+  devtool: `source-map`,
 
   module: {
     rules: [
@@ -36,6 +36,7 @@ module.exports = {
               },
               modules: false
             }],
+
             `react`
           ],
           env: {

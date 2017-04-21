@@ -2,7 +2,7 @@ import electron, { app, BrowserWindow, Menu, shell, dialog } from 'electron';
 import path from 'path';
 import url from 'url';
 
-import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
+// import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 
 app.setName(`Aice`);
 
@@ -244,7 +244,7 @@ const createWindow = ()=> {
     width: 800,
     height: 600,
     fullscreenable: false,
-    backgroundColor: darkBaseTheme.palette.canvasColor
+    backgroundColor: `#000`
   });
 
   mainWindow.maximize();
