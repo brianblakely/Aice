@@ -5,7 +5,7 @@ import React from 'react';
 import { OSDialog, currentWindow } from '../js/electron.js';
 
 import {Dialog, DialogContent, DialogActions, DialogTitle} from 'material-ui/Dialog';
-import RaisedButton from 'material-ui/Button';
+import Button from 'material-ui/Button';
 import {Menu, MenuItem} from 'material-ui/Menu';
 import TextField from 'material-ui/TextField';
 import IconFolderOpen from 'material-ui-icons/FolderOpen';
@@ -28,6 +28,42 @@ class AddEmulator extends React.Component {
     super();
 
     this.classes = this.context.styleManager.render(styleSheet);
+
+    this.emuOptions = [
+      `Custom...`,
+      `RetroArch`,
+      `Dolphin`,
+      `ePSXe`,
+      `Gens`,
+      `higan`,
+      `Mednafen`,
+      `Mupen64plus`,
+      `Nestopia`,
+      `PCSXR`,
+      `PCSX2`,
+      `PPSSPP`,
+      `Project64`,
+      `Snes9x`,
+      `VisualBoyAdvance`,
+      `Yabause`,
+      `ZSNES`
+    ];
+
+    this.emuHandleClick = (e)=> this.setState({
+      emuOpen: true,
+      emuAnchorEl: e.currentTarget
+    });
+
+    this.emuMenuClick = (e, index)=> this.setState({
+      emuOpen: false,
+      emuSelectedIndex: index,
+      emuCustom: index === this.emuOptions.indexOf(`Custom...`),
+      emuRetroarch: index === this.emuOptions.indexOf(`RetroArch`)
+    });
+
+    this.emuClose = ()=> this.setState({
+      emuOpen: false
+    });
   }
 
   render() {
@@ -41,47 +77,42 @@ class AddEmulator extends React.Component {
         </DialogTitle>
 
         <DialogContent>
+          <List>
+            <ListItem
+              button
+              onClick={this.emuHandleClick}
+            >
+              <ListItemText primary={this.emuOptions[this.state.emuSelectedIndex]} />
+            </ListItem>
+          </List>
           <Menu
-            open={false}
-            floatingLabelText="Emulator"
-            errorText={window.error && `This field is required`}
+            anchorEl={this.state.emuAnchorEl}
+            open={this.state.emuOpen}
+            onRequestClose={this.state.emuClose}
           >
-            <MenuItem value={1} primaryText="Custom..." />
-            <MenuItem value={2} primaryText="RetroArch" />
-            <MenuItem value={2} primaryText="Dolphin" />
-            <MenuItem value={3} primaryText="ePSXe" />
-            <MenuItem value={4} primaryText="Gens" />
-            <MenuItem value={5} primaryText="higan" />
-            <MenuItem value={5} primaryText="Mednafen" />
-            <MenuItem value={5} primaryText="Mupen64plus" />
-            <MenuItem value={5} primaryText="Nestopia" />
-            <MenuItem value={5} primaryText="PCSXR" />
-            <MenuItem value={5} primaryText="PCSX2" />
-            <MenuItem value={5} primaryText="PPSSPP" />
-            <MenuItem value={5} primaryText="Project64" />
-            <MenuItem value={5} primaryText="Snes9x" />
-            <MenuItem value={5} primaryText="VisualBoyAdvance" />
-            <MenuItem value={5} primaryText="Yabause" />
-            <MenuItem value={5} primaryText="ZSNES" />
+            {this.emuOptions.map((emu, index)=> {
+              return (
+                <MenuItem
+                  key={emu}
+                  selected={index === this.state.emuSelectedIndex}
+                  onClick={(e)=> this.emuMenuClick(e, index)}
+                >
+                  {emu}
+                </MenuItem>
+              );
+            })}
           </Menu><br />
 
           <TextField
-            floatingLabelText="Emulator Name"
-            errorText={window.customEmu && `This field is required`}
-            disabled={!window.customEmu}
+            label="Emulator Name"
+            required={this.state.emuCustom}
+            disabled={!this.state.emuCustom}
           /><br />
 
           <TextField
-            name="emulator-location"
-            floatingLabelText=""
-            errorText={window.error && `This field is required`}
-            disabled={true}
+            disabled
           /><br />
-          <FlatButton
-            label="Emulator Location"
-            labelPosition="before"
-            primary={true}
-            icon={<IconFolderOpen />}
+          <Button
             onClick={()=> {
               OSDialog.showOpenDialog(currentWindow, {
                 title: `Emulator Location`,
@@ -90,19 +121,16 @@ class AddEmulator extends React.Component {
               }, (e)=> {
               });
             }}
-          /><br />
+          >
+            Emulator Location
+            <IconFolderOpen />
+          </Button><br />
 
           <TextField
-            name="retroarch-core"
-            floatingLabelText=""
-            errorText={window.retroarch && `This field is required`}
-            disabled={!window.retroarch}
+            required={this.state.emuRetroarch}
+            disabled={!this.state.emuRetroarch}
           /><br />
-          <FlatButton
-            label="RetroArch Core"
-            labelPosition="before"
-            primary={true}
-            icon={<IconFolderOpen />}
+          <Button
             onClick={()=> {
               OSDialog.showOpenDialog(currentWindow, {
                 title: `RetroArch Core`,
@@ -111,8 +139,11 @@ class AddEmulator extends React.Component {
               }, (e)=> {
               });
             }}
-            disabled={!window.retroarch}
-          /><br />
+            disabled={!this.state.emuRetroarch}
+          >
+            RetroArch Core
+            <IconFolderOpen />
+          </Button><br />
 
           <TextField
             floatingLabelText="RetroArch Core Name"
